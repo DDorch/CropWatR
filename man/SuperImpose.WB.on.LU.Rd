@@ -2,10 +2,10 @@
 \alias{SuperImpose.WB.on.LU}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+ ~~function to do ... ~~
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+ ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
 SuperImpose.WB.on.LU(Croplayer, rainfed = FALSE, type = c("seasonal", "annual"), Growing.Season.GW.BW = FALSE)
@@ -13,42 +13,42 @@ SuperImpose.WB.on.LU(Croplayer, rainfed = FALSE, type = c("seasonal", "annual"),
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{Croplayer}{
-%%     ~~Describe \code{Croplayer} here~~
+    ~~Describe \code{Croplayer} here~~
 }
   \item{rainfed}{
-%%     ~~Describe \code{rainfed} here~~
+    ~~Describe \code{rainfed} here~~
 }
   \item{type}{
-%%     ~~Describe \code{type} here~~
+    ~~Describe \code{type} here~~
 }
   \item{Growing.Season.GW.BW}{
-%%     ~~Describe \code{Growing.Season.GW.BW} here~~
+    ~~Describe \code{Growing.Season.GW.BW} here~~
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+ ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+ ~Describe the value returned
+ If it is a LIST, use
+ \item{comp1 }{Description of 'comp1'}
+ \item{comp2 }{Description of 'comp2'}
+...
 }
 \references{
-%% ~put references to the literature/web site here ~
+~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+ ~~who you are~~
 }
 \note{
-%%  ~~further notes~~
+ ~~further notes~~
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
 ##---- Should be DIRECTLY executable !! ----
@@ -56,49 +56,49 @@ SuperImpose.WB.on.LU(Croplayer, rainfed = FALSE, type = c("seasonal", "annual"),
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
-function (Croplayer, rainfed = FALSE, type = c("seasonal", "annual"), 
-    Growing.Season.GW.BW = FALSE) 
+function (Croplayer, rainfed = FALSE, type = c("seasonal", "annual"),
+    Growing.Season.GW.BW = FALSE)
 {
     load("Vars.Rdata")
     Irr.Vars <- Vars[-c(3, 6, 8, 14, 15)]
-    if (Growing.Season.GW.BW == TRUE) 
+    if (Growing.Season.GW.BW == TRUE)
         class <- "BW.GW"
-    if (Growing.Season.GW.BW == FALSE) 
+    if (Growing.Season.GW.BW == FALSE)
         class <- "WB"
-    if (rainfed == FALSE) 
+    if (rainfed == FALSE)
         Irr <- "irrigated"
-    if (rainfed == TRUE) 
+    if (rainfed == TRUE)
         Irr <- "rainfed"
     if (Croplayer \%in\% Irr.Vars) {
         LU.brick <- raster(paste0(Intermediates, Croplayer, ".grd"))
         LU.brick[LU.brick == 0] <- NA
-        if (rainfed == FALSE && type == "annual") 
-            WB.brick <- brick(paste0(Intermediates, Croplayer, 
+        if (rainfed == FALSE && type == "annual")
+            WB.brick <- brick(paste0(Intermediates, Croplayer,
                 ".Basic.WB.grd"))
-        if (rainfed == FALSE && type == "seasonal") 
-            WB.brick <- brick(paste0(Intermediates, Croplayer, 
+        if (rainfed == FALSE && type == "seasonal")
+            WB.brick <- brick(paste0(Intermediates, Croplayer,
                 ".Growing.Season.WB.grd"))
-        if (rainfed == TRUE && type == "annual") 
-            WB.brick <- brick(paste0(Intermediates, Croplayer, 
+        if (rainfed == TRUE && type == "annual")
+            WB.brick <- brick(paste0(Intermediates, Croplayer,
                 ".Basic.Rainfed.WB.grd"))
-        if (rainfed == TRUE && type == "seasonal") 
-            WB.brick <- brick(paste0(Intermediates, Croplayer, 
+        if (rainfed == TRUE && type == "seasonal")
+            WB.brick <- brick(paste0(Intermediates, Croplayer,
                 ".Growing.Season.Rainfed.WB.grd"))
-        if (Growing.Season.GW.BW == FALSE && type == "annual") 
-            WB.brick <- brick(paste0(Intermediates, Croplayer, 
+        if (Growing.Season.GW.BW == FALSE && type == "annual")
+            WB.brick <- brick(paste0(Intermediates, Croplayer,
                 ".Basic.WB.grd"))
-        if (Growing.Season.GW.BW == TRUE && type == "seasonal") 
-            WB.brick <- brick(paste0(Intermediates, Croplayer, 
+        if (Growing.Season.GW.BW == TRUE && type == "seasonal")
+            WB.brick <- brick(paste0(Intermediates, Croplayer,
                 ".Growing.Season.GW.BW.WB.grd"))
-        if (Growing.Season.GW.BW == TRUE && type == "seasonal" && 
-            rainfed == FALSE) 
-            WB.brick <- brick(paste0(Intermediates, Croplayer, 
+        if (Growing.Season.GW.BW == TRUE && type == "seasonal" &&
+            rainfed == FALSE)
+            WB.brick <- brick(paste0(Intermediates, Croplayer,
                 ".Growing.Season.BW.GW.WB.grd"))
         Names <- names(WB.brick)
         WB.brick <- extend(WB.brick, LU.brick)
         LU.brick <- extend(LU.brick, WB.brick)
         LU.brick <- extend(LU.brick, WB.brick)
-        WB.brick <- calc(WB.brick, fun = function(x) replace(x, 
+        WB.brick <- calc(WB.brick, fun = function(x) replace(x,
             x < 0, 0.001))
         WB.total <- overlay(WB.brick, LU.brick, fun = prod)
         names(WB.total) <- names(WB.brick)
@@ -110,42 +110,42 @@ function (Croplayer, rainfed = FALSE, type = c("seasonal", "annual"),
         print(paste("saving", Croplayer))
         print(cellStats(WB.total, summary))
         print(cellStats(WB.mm, summary))
-        writeRaster(WB.total, filename = paste0(Intermediates, 
-            "Total.", type, ".", class, ".", Irr, ".", Croplayer, 
+        writeRaster(WB.total, filename = paste0(Intermediates,
+            "Total.", type, ".", class, ".", Irr, ".", Croplayer,
             ".grd"), overwrite = TRUE)
-        writeRaster(WB.mm, filename = paste0(Intermediates, "mm.", 
-            type, ".", class, ".", Irr, ".", Croplayer, ".grd"), 
+        writeRaster(WB.mm, filename = paste0(Intermediates, "mm.",
+            type, ".", class, ".", Irr, ".", Croplayer, ".grd"),
             overwrite = TRUE)
     }
     if (!(Croplayer \%in\% Irr.Vars)) {
         LU.brick <- raster(paste0(Intermediates, Croplayer, ".grd"))
         LU.brick[LU.brick == 0] <- NA
-        if (rainfed == FALSE && type == "annual") 
-            WB.brick <- brick(paste0(Intermediates, Croplayer, 
+        if (rainfed == FALSE && type == "annual")
+            WB.brick <- brick(paste0(Intermediates, Croplayer,
                 ".Basic.WB.grd"))
-        if (rainfed == FALSE && type == "seasonal") 
-            WB.brick <- brick(paste0(Intermediates, Croplayer, 
+        if (rainfed == FALSE && type == "seasonal")
+            WB.brick <- brick(paste0(Intermediates, Croplayer,
                 ".Growing.Season.WB.grd"))
-        if (rainfed == TRUE && type == "annual") 
-            WB.brick <- brick(paste0(Intermediates, Croplayer, 
+        if (rainfed == TRUE && type == "annual")
+            WB.brick <- brick(paste0(Intermediates, Croplayer,
                 ".Basic.Rainfed.WB.grd"))
-        if (rainfed == TRUE && type == "seasonal") 
-            WB.brick <- brick(paste0(Intermediates, Croplayer, 
+        if (rainfed == TRUE && type == "seasonal")
+            WB.brick <- brick(paste0(Intermediates, Croplayer,
                 ".Growing.Season.Rainfed.WB.grd"))
-        if (Growing.Season.GW.BW == FALSE && type == "annual") 
-            WB.brick <- brick(paste0(Intermediates, Croplayer, 
+        if (Growing.Season.GW.BW == FALSE && type == "annual")
+            WB.brick <- brick(paste0(Intermediates, Croplayer,
                 ".Basic.WB.grd"))
-        if (Growing.Season.GW.BW == TRUE && type == "seasonal") 
-            WB.brick <- brick(paste0(Intermediates, Croplayer, 
+        if (Growing.Season.GW.BW == TRUE && type == "seasonal")
+            WB.brick <- brick(paste0(Intermediates, Croplayer,
                 ".Growing.Season.GW.BW.WB.grd"))
-        if (Growing.Season.GW.BW == TRUE && type == "seasonal" && 
-            rainfed == FALSE) 
-            WB.brick <- brick(paste0(Intermediates, Croplayer, 
+        if (Growing.Season.GW.BW == TRUE && type == "seasonal" &&
+            rainfed == FALSE)
+            WB.brick <- brick(paste0(Intermediates, Croplayer,
                 ".Growing.Season.BW.GW.WB.grd"))
         Names <- names(WB.brick)
         WB.brick <- extend(WB.brick, LU.brick)
         LU.brick <- extend(LU.brick, WB.brick)
-        WB.brick <- calc(WB.brick, fun = function(x) replace(x, 
+        WB.brick <- calc(WB.brick, fun = function(x) replace(x,
             x < 0, 0.001))
         WB.total <- overlay(WB.brick, LU.brick, fun = prod)
         names(WB.total) <- names(WB.brick)
@@ -157,11 +157,11 @@ function (Croplayer, rainfed = FALSE, type = c("seasonal", "annual"),
         print(paste("saving", Croplayer))
         print(cellStats(WB.total, summary))
         print(cellStats(WB.mm, summary))
-        writeRaster(WB.total, filename = paste0(Intermediates, 
-            "Total.", type, ".", class, ".", Irr, ".", Croplayer, 
+        writeRaster(WB.total, filename = paste0(Intermediates,
+            "Total.", type, ".", class, ".", Irr, ".", Croplayer,
             ".grd"), overwrite = TRUE)
-        writeRaster(WB.mm, filename = paste0(Intermediates, "mm.", 
-            type, ".", class, ".", Irr, ".", Croplayer, ".grd"), 
+        writeRaster(WB.mm, filename = paste0(Intermediates, "mm.",
+            type, ".", class, ".", Irr, ".", Croplayer, ".grd"),
             overwrite = TRUE)
     }
   }

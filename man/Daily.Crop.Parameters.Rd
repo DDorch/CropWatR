@@ -2,10 +2,10 @@
 \alias{Daily.Crop.Parameters}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+ ~~function to do ... ~~
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+ ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
 Daily.Crop.Parameters(Croplayer)
@@ -13,33 +13,33 @@ Daily.Crop.Parameters(Croplayer)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{Croplayer}{
-%%     ~~Describe \code{Croplayer} here~~
+    ~~Describe \code{Croplayer} here~~
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+ ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+ ~Describe the value returned
+ If it is a LIST, use
+ \item{comp1 }{Description of 'comp1'}
+ \item{comp2 }{Description of 'comp2'}
+...
 }
 \references{
-%% ~put references to the literature/web site here ~
+~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+ ~~who you are~~
 }
 \note{
-%%  ~~further notes~~
+ ~~further notes~~
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
 ##---- Should be DIRECTLY executable !! ----
@@ -47,7 +47,7 @@ Daily.Crop.Parameters(Croplayer)
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
-function (Croplayer) 
+function (Croplayer)
 {
     Calc.Basal.Crop.Coeff(Croplayer)
     KcMAX(Croplayer)

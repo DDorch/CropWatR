@@ -2,10 +2,10 @@
 \alias{Calculate.ETo}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+ ~~function to do ... ~~
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+ ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
 Calculate.ETo(Elevation, MaxTemperature, MinTemperature, MeanTemperature, Precipitation, VP, MaxRH, MinRH, Wind, SolarRad, Filename)
@@ -13,63 +13,63 @@ Calculate.ETo(Elevation, MaxTemperature, MinTemperature, MeanTemperature, Precip
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{Elevation}{
-%%     ~~Describe \code{Elevation} here~~
+    ~~Describe \code{Elevation} here~~
 }
   \item{MaxTemperature}{
-%%     ~~Describe \code{MaxTemperature} here~~
+    ~~Describe \code{MaxTemperature} here~~
 }
   \item{MinTemperature}{
-%%     ~~Describe \code{MinTemperature} here~~
+    ~~Describe \code{MinTemperature} here~~
 }
   \item{MeanTemperature}{
-%%     ~~Describe \code{MeanTemperature} here~~
+    ~~Describe \code{MeanTemperature} here~~
 }
   \item{Precipitation}{
-%%     ~~Describe \code{Precipitation} here~~
+    ~~Describe \code{Precipitation} here~~
 }
   \item{VP}{
-%%     ~~Describe \code{VP} here~~
+    ~~Describe \code{VP} here~~
 }
   \item{MaxRH}{
-%%     ~~Describe \code{MaxRH} here~~
+    ~~Describe \code{MaxRH} here~~
 }
   \item{MinRH}{
-%%     ~~Describe \code{MinRH} here~~
+    ~~Describe \code{MinRH} here~~
 }
   \item{Wind}{
-%%     ~~Describe \code{Wind} here~~
+    ~~Describe \code{Wind} here~~
 }
   \item{SolarRad}{
-%%     ~~Describe \code{SolarRad} here~~
+    ~~Describe \code{SolarRad} here~~
 }
   \item{Filename}{
-%%     ~~Describe \code{Filename} here~~
+    ~~Describe \code{Filename} here~~
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+ ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+ ~Describe the value returned
+ If it is a LIST, use
+ \item{comp1 }{Description of 'comp1'}
+ \item{comp2 }{Description of 'comp2'}
+...
 }
 \references{
-%% ~put references to the literature/web site here ~
+~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+ ~~who you are~~
 }
 \note{
-%%  ~~further notes~~
+ ~~further notes~~
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
 ##---- Should be DIRECTLY executable !! ----
@@ -77,8 +77,8 @@ Calculate.ETo(Elevation, MaxTemperature, MinTemperature, MeanTemperature, Precip
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
-function (Elevation, MaxTemperature, MinTemperature, MeanTemperature, 
-    Precipitation, VP, MaxRH, MinRH, Wind, SolarRad, Filename) 
+function (Elevation, MaxTemperature, MinTemperature, MeanTemperature,
+    Precipitation, VP, MaxRH, MinRH, Wind, SolarRad, Filename)
 {
     LHV <- 2.45
     Cp <- 1.013 * 10^-3
@@ -104,7 +104,7 @@ function (Elevation, MaxTemperature, MinTemperature, MeanTemperature,
     Lat <- raster("Lat.values.grd")
     Long <- raster("Long.values.grd")
     Julian <- brick("Julian.values.grd")
-    Rasters <- list(MaxTemp, MinTemp, MeanTemp, MxRH, MnRH, U2, 
+    Rasters <- list(MaxTemp, MinTemp, MeanTemp, MxRH, MnRH, U2,
         Solar, Ea, Julian)
     print("do the rasters match?")
     print(sapply(Rasters, function(x) compareRaster(x, Elev)))
@@ -128,7 +128,7 @@ function (Elevation, MaxTemperature, MinTemperature, MeanTemperature,
     Multiply.Day <- calc(Dr, fun = function(x) {
         (24 * 60)/pi * Gsc * x
     })
-    Ra <- Multiply.Day * (Ws * sin(Lrad) * sin(Theta) + cos(Lrad) * 
+    Ra <- Multiply.Day * (Ws * sin(Lrad) * sin(Theta) + cos(Lrad) *
         cos(Theta) * sin(Ws))
     Rs0 <- (As0 + Bs0 * Elev) * Ra
     Sigma <- 4.903 * 10^-9
@@ -156,14 +156,14 @@ function (Elevation, MaxTemperature, MinTemperature, MeanTemperature,
     Sigma <- 4.903 * 10^-9
     KTmax <- MaxTemp + 273.16
     KTmin <- MinTemp + 273.16
-    Rnl <- Sigma * ((KTmax^4 + KTmin^4)/2) * (0.34 - 0.14 * Ea^0.5) * 
+    Rnl <- Sigma * ((KTmax^4 + KTmin^4)/2) * (0.34 - 0.14 * Ea^0.5) *
         (1.35 * (Solar/Rs0) - 0.35)
     Rns <- calc(Solar, fun = function(x) {
         (1 - Alpha) * x
     })
     Rn <- Rns - Rnl
     Rn <- dropLayer(Rn, 366)
-    Numerator <- 0.408 * Delta * (Rn - G) + gamma * 900/(MeanTemp + 
+    Numerator <- 0.408 * Delta * (Rn - G) + gamma * 900/(MeanTemp +
         273) * U2 * (Es - Ea)
     Denominator <- Delta + gamma * (1 + 0.34 * U2)
     ETo <- Numerator/Denominator

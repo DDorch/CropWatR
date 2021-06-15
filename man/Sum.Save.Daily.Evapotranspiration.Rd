@@ -2,10 +2,10 @@
 \alias{Sum.Save.Daily.Evapotranspiration}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+ ~~function to do ... ~~
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+ ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
 Sum.Save.Daily.Evapotranspiration(Croplayer, rainfed = FALSE)
@@ -13,36 +13,36 @@ Sum.Save.Daily.Evapotranspiration(Croplayer, rainfed = FALSE)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{Croplayer}{
-%%     ~~Describe \code{Croplayer} here~~
+    ~~Describe \code{Croplayer} here~~
 }
   \item{rainfed}{
-%%     ~~Describe \code{rainfed} here~~
+    ~~Describe \code{rainfed} here~~
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+ ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+ ~Describe the value returned
+ If it is a LIST, use
+ \item{comp1 }{Description of 'comp1'}
+ \item{comp2 }{Description of 'comp2'}
+...
 }
 \references{
-%% ~put references to the literature/web site here ~
+~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+ ~~who you are~~
 }
 \note{
-%%  ~~further notes~~
+ ~~further notes~~
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
 ##---- Should be DIRECTLY executable !! ----
@@ -50,63 +50,63 @@ Sum.Save.Daily.Evapotranspiration(Croplayer, rainfed = FALSE)
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
-function (Croplayer, rainfed = FALSE) 
+function (Croplayer, rainfed = FALSE)
 {
     Crop <- Croplayer
-    if (Croplayer == "spring_barley" || Croplayer == "fall_barley") 
+    if (Croplayer == "spring_barley" || Croplayer == "fall_barley")
         Crop <- "barley"
-    if (Croplayer == "spring_oats" || Croplayer == "fall_oats") 
+    if (Croplayer == "spring_oats" || Croplayer == "fall_oats")
         Crop <- "oats"
     print(Croplayer)
     setwd(paste0(Path, "/CropWatR/Intermediates/"))
     if (rainfed == FALSE) {
-        load(paste("Preseason_Soil.Evaporation", Croplayer, "Rdata", 
+        load(paste("Preseason_Soil.Evaporation", Croplayer, "Rdata",
             sep = "."))
-        load(paste("Preseason_Weed.Transpiration", Croplayer, 
+        load(paste("Preseason_Weed.Transpiration", Croplayer,
             "Rdata", sep = "."))
-        Pre.Evap <- lapply(Pre.KeETo, function(x) x[, (grep("layer", 
+        Pre.Evap <- lapply(Pre.KeETo, function(x) x[, (grep("layer",
             names(x)))])
-        Pre.weed.Kcb <- lapply(Pre.Kcb.tot, function(x) x[, (grep("layer", 
+        Pre.weed.Kcb <- lapply(Pre.Kcb.tot, function(x) x[, (grep("layer",
             names(x)))])
-        load(paste("Growing.Season_Soil.Evaporation", Croplayer, 
+        load(paste("Growing.Season_Soil.Evaporation", Croplayer,
             "Rdata", sep = "."))
-        load(file = paste("Growing.Season_Transpiration", Croplayer, 
+        load(file = paste("Growing.Season_Transpiration", Croplayer,
             "Rdata", sep = "."))
-        Transpiration <- lapply(Transp.final, function(x) x[, 
+        Transpiration <- lapply(Transp.final, function(x) x[,
             (grep("layer", names(x)))])
         Evap <- lapply(E, function(x) x[, (grep("layer", names(x)))])
-        Post.KeETo <- local(get(load(paste("Postseason_Soil.Evaporation", 
+        Post.KeETo <- local(get(load(paste("Postseason_Soil.Evaporation",
             Croplayer, "Rdata", sep = "."))))
-        Post.Kcb.tot <- local(get(load(paste("Postseason_Weed.Transpiration", 
+        Post.Kcb.tot <- local(get(load(paste("Postseason_Weed.Transpiration",
             Croplayer, "Rdata", sep = "."))))
-        Post.Evap <- lapply(Post.KeETo, function(x) x[, (grep("layer", 
+        Post.Evap <- lapply(Post.KeETo, function(x) x[, (grep("layer",
             names(x)))])
-        Post.weed.Kcb <- lapply(Post.Kcb.tot, function(x) x[, 
+        Post.weed.Kcb <- lapply(Post.Kcb.tot, function(x) x[,
             (grep("layer", names(x)))])
     }
     if (rainfed == TRUE) {
-        load(paste("Preseason_Soil.Evaporation", Croplayer, "Rdata", 
+        load(paste("Preseason_Soil.Evaporation", Croplayer, "Rdata",
             sep = "."))
-        load(paste("Preseason_Weed.Transpiration", Croplayer, 
+        load(paste("Preseason_Weed.Transpiration", Croplayer,
             "Rdata", sep = "."))
-        Pre.Evap <- lapply(Pre.KeETo, function(x) x[, (grep("layer", 
+        Pre.Evap <- lapply(Pre.KeETo, function(x) x[, (grep("layer",
             names(x)))])
-        Pre.weed.Kcb <- lapply(Pre.Kcb.tot, function(x) x[, (grep("layer", 
+        Pre.weed.Kcb <- lapply(Pre.Kcb.tot, function(x) x[, (grep("layer",
             names(x)))])
-        load(paste("Growing.Season.Rainfed_Soil.Evaporation", 
+        load(paste("Growing.Season.Rainfed_Soil.Evaporation",
             Croplayer, "Rdata", sep = "."))
-        load(file = paste("Growing.Season.Rainfed_Transpiration", 
+        load(file = paste("Growing.Season.Rainfed_Transpiration",
             Croplayer, "Rdata", sep = "."))
-        Transpiration <- lapply(Transp.final, function(x) x[, 
+        Transpiration <- lapply(Transp.final, function(x) x[,
             (grep("layer", names(x)))])
         Evap <- lapply(E, function(x) x[, (grep("layer", names(x)))])
-        Post.KeETo <- local(get(load(paste("Postseason_Soil.Evaporation", 
+        Post.KeETo <- local(get(load(paste("Postseason_Soil.Evaporation",
             Croplayer, "Rdata", sep = "."))))
-        Post.Kcb.tot <- local(get(load(paste("Postseason_Weed.Transpiration", 
+        Post.Kcb.tot <- local(get(load(paste("Postseason_Weed.Transpiration",
             Croplayer, "Rdata", sep = "."))))
-        Post.Evap <- lapply(Post.KeETo, function(x) x[, (grep("layer", 
+        Post.Evap <- lapply(Post.KeETo, function(x) x[, (grep("layer",
             names(x)))])
-        Post.weed.Kcb <- lapply(Post.Kcb.tot, function(x) x[, 
+        Post.weed.Kcb <- lapply(Post.Kcb.tot, function(x) x[,
             (grep("layer", names(x)))])
     }
     load(paste("BASE", Croplayer, "MNRH_", "MasterDF2", sep = "."))
@@ -127,17 +127,17 @@ function (Croplayer, rainfed = FALSE)
         PreP[[i]] <- Pre.Evap[[i]] + Pre.weed.Kcb[[i]]
         GR.P[[i]] <- Evap[[i]] + Transpiration[[i]]
         PostP[[i]] <- Post.Evap[[i]] + Post.weed.Kcb[[i]]
-        Final[[i]] <- as.data.frame(cbind(PreP[[i]], GR.P[[i]], 
+        Final[[i]] <- as.data.frame(cbind(PreP[[i]], GR.P[[i]],
             PostP[[i]]))
     }
     if (Croplayer == "durum_wheat" || Croplayer == "fall_barley") {
-        Cut <- names(unlist(lapply(Final, function(x) which(nrow(x) == 
+        Cut <- names(unlist(lapply(Final, function(x) which(nrow(x) ==
             0))))
         Fini <- Final[-(which(names(Final) \%in\% Cut))]
         Fini <- lapply(Final, function(x) x[, 1:362])
     }
     if (Croplayer == "sugarbeets") {
-        Cut <- names(unlist(lapply(Final, function(x) which(ncol(x) < 
+        Cut <- names(unlist(lapply(Final, function(x) which(ncol(x) <
             362))))
         Fini <- Final[-(which(names(Final) \%in\% Cut))]
         lapply(Fini, dim)
@@ -145,7 +145,7 @@ function (Croplayer, rainfed = FALSE)
     if (Croplayer == "alfalfa") {
         Fini <- lapply(Final, function(x) x[, 1:358])
     }
-    if (Croplayer != "durum_wheat" && Croplayer != "alfalfa" && 
+    if (Croplayer != "durum_wheat" && Croplayer != "alfalfa" &&
         Croplayer != "fall_barley") {
         Fini <- lapply(Final, function(x) x[, 1:362])
     }
@@ -176,11 +176,11 @@ function (Croplayer, rainfed = FALSE)
         WB.brick[is.na(LU.brick)] <- NA
     }
     setwd(paste0(Path, "/CropWatR/Data"))
-    if (rainfed == FALSE) 
-        writeRaster(WB.brick, filename = paste(Croplayer, "Daily.ET.grd", 
+    if (rainfed == FALSE)
+        writeRaster(WB.brick, filename = paste(Croplayer, "Daily.ET.grd",
             sep = "."), overwrite = TRUE)
-    if (rainfed == TRUE) 
-        writeRaster(WB.brick, filename = paste(Croplayer, "Rainfed.Daily.ET.grd", 
+    if (rainfed == TRUE)
+        writeRaster(WB.brick, filename = paste(Croplayer, "Rainfed.Daily.ET.grd",
             sep = "."), overwrite = TRUE)
   }
 }
